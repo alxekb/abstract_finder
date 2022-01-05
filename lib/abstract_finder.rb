@@ -43,7 +43,7 @@ class AbstractFinder < BaseFinder
 
   # define #search_by method in query model and use this finder
   def query
-    @collection = model.includes(associations).search_by(@filters[:q]) if model.respond_to? :search_by
+    @collection = @collection.includes(associations).search_by(@filters[:q]) if @collection.respond_to? :search_by
   end
 
   def filter; end
