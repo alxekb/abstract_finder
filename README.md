@@ -5,11 +5,12 @@
 General idea to pass query, relations to avoid N+1 and permitted params to paginate, filter and sort AbstractFinder collection.
 
 
-class RecordsContrroller << Api::BaseController
+``` ruby
+class RecordsContrroller < Api::BaseController
   def index
   finder = AbstractFinder.call(
-    query,
-    [:rating],
+    Record.latest, # scope, method or class
+    %w[rating status],
     params
   )
 
@@ -17,4 +18,11 @@ class RecordsContrroller << Api::BaseController
     finder.collection,
     { meta: finder.meta, params: permitted_params }
   ).serializable_hash
+
+  private
+
+  def params
+    params.require(:record).permit(:page, :per_page, :search_by, :q, :order_by)
+  end
 end
+```
