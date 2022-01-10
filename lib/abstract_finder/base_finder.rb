@@ -31,7 +31,7 @@ class BaseFinder
   def total
     return 0 if @collection.blank?
 
-    @total ||= @collection.count
+    @total ||= @collection.size
   end
 
   def meta

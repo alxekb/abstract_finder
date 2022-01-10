@@ -2,16 +2,16 @@
 
 ### API wrapper for search, pagination, filter.
 
-General idea to pass query, relations to avoid N+1 and permitted params to paginate, filter and sort AbstractFinder collection.
+General idea to pass a query, relations to avoid N+1 and permitted params to paginate, filter and sort AbstractFinder collection.
 
 
 ``` ruby
 class RecordsContrroller < Api::BaseController
   def index
   finder = AbstractFinder.call(
-    Record.latest, # scope, method or class
-    %w[rating status],
-    params
+    Record.latest,     # scope, method or class
+    %w[rating status], # to fight N+1
+    params             # permitted params for pagination, filtering, ordering and search
   )
 
   render json: RecordSerializer.new(
