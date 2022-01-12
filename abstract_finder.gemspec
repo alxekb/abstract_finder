@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'abstract_finder'
-  s.version     = '0.0.3'
+  s.version     = '0.0.4'
   s.summary     = 'Abstract finder for rails api with gueries, sort, filter and pagination'
   s.description = 'Gem to simplify AR queries, it executes query and includes relations.'
   s.authors     = ['Aleksei Ivanov']

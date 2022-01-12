@@ -38,7 +38,8 @@ class BaseFinder
     {
       page: page,
       per_page: per_page,
-      total: @total
+      total: @total,
+      next_page: (@total - (page * per_page + per_page)).positive?
     }
   end
 
