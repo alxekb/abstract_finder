@@ -34,12 +34,18 @@ class BaseFinder
     @total ||= @collection.size
   end
 
+  def next_page?
+    (@total - (page.next * per_page)).positive?
+  rescue StandardError
+    false
+  end
+
   def meta
     {
       page: page,
       per_page: per_page,
       total: @total,
-      next_page: (@total - (page * per_page + per_page)).positive?
+      next_page: next_page?
     }
   end
 
