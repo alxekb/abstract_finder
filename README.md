@@ -8,16 +8,17 @@ General idea to pass a query, relations to avoid N+1 and permitted params to pag
 ``` ruby
 class RecordsContrroller < Api::BaseController
   def index
-  finder = AbstractFinder.call(
-    Record.latest,     # scope, method or class
-    %w[rating status], # to fight N+1
-    params             # permitted params for pagination, filtering, ordering and search
-  )
+    finder = AbstractFinder.call(
+      Record.latest,     # scope, method or a class
+      %w[rating status], # to fight N+1
+      params             # permitted params for pagination, filtering, ordering and search
+    )
 
-  render json: RecordSerializer.new(
-    finder.collection,
-    { meta: finder.meta, params: permitted_params }
-  ).serializable_hash
+    render json: RecordSerializer.new(
+      finder.collection,
+      { meta: finder.meta, params: permitted_params }
+    ).serializable_hash
+  end
 
   private
 
